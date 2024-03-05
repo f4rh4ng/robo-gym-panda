@@ -23,6 +23,9 @@ Added features :
 
     ![ezgif com-gif-maker(1)](https://github.com/f4rh4ng/robo-gym-panda/assets/89604072/b328a398-50dc-41f2-8683-0f43f21f6085)
 
+  - Added environment setup for training and testing wth [D4PG algorithm](https://github.com/schatty/oprl/tree/legacy_d4pg)
+  - Added simulation setup for Franka Emika Panda robot in [robo-gym-robot-servers](https://github.com/f4rh4ng/robo-gym-robot-servers)
+
 # Installation
 [back to top](#robo-gym-panda)
 
