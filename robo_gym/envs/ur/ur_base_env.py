@@ -34,7 +34,7 @@ class URBaseEnv(gym.Env):
     real_robot = False
     max_episode_steps = 300
 
-    def __init__(self, rs_address=None, fix_base=False, fix_shoulder=False, fix_elbow=False, fix_wrist_1=False, fix_wrist_2=False, fix_wrist_3=True, ur_model='ur5', rs_state_to_info=True, **kwargs):
+    def __init__(self, rs_address=None, fix_base=False, fix_shoulder=False, fix_elbow=False, fix_wrist_1=False, fix_wrist_2=False, fix_wrist_3=True, ur_model='ur5', rs_state_to_info=False, **kwargs):
         self.ur = ur_utils.UR(model=ur_model)
         self.elapsed_steps = 0
 
@@ -59,7 +59,6 @@ class URBaseEnv(gym.Env):
         else:
             print("WARNING: No IP and Port passed. Simulation will not be started")
             print("WARNING: Use this only to get environment shape")
-
 
     def _set_initial_robot_server_state(self, rs_state) -> robot_server_pb2.State:
         string_params = {}
@@ -153,6 +152,7 @@ class URBaseEnv(gym.Env):
         joint_positions_dict = self._get_joint_positions()
         
         joint_positions = np.array([joint_positions_dict.get(joint_pos) for joint_pos in joint_pos_names])
+        #print(joint_positions)
 
 
         joints_position_norm = self.ur.normalize_joint_values(joints=joint_positions)
@@ -189,6 +189,7 @@ class URBaseEnv(gym.Env):
 
         # Add missing joints which were fixed at initialization
         action = self.add_fixed_joints(action)
+        print('action is:', action)
 
         # Convert environment action to robot server action
         rs_action = self.env_action_to_rs_action(action)
@@ -329,8 +330,11 @@ class URBaseEnv(gym.Env):
             joint_velocities.append(rs_state[velocity])
         joint_velocities = np.array(joint_velocities)
 
+        #print(joint_velocities)
+
         # Compose environment state
         state = np.concatenate((joint_positions, joint_velocities))
+        #print('state is: ',state)
 
         return state.astype(np.float32)
 
@@ -343,7 +347,7 @@ class URBaseEnv(gym.Env):
 
         """
         # Joint position range tolerance
-        pos_tolerance = np.full(6,0.1)
+        pos_tolerance = np.full(6, 0.1)
 
         # Joint positions range used to determine if there is an error in the sensor readings
         max_joint_positions = np.add(np.full(6, 1.0), pos_tolerance)
@@ -357,8 +361,7 @@ class URBaseEnv(gym.Env):
 
         return gym.spaces.Box(low=min_obs, high=max_obs, dtype=np.float32)
 
-    
-    def _get_action_space(self)-> gym.spaces.Box:
+    def _get_action_space(self) -> gym.spaces.Box:
         """Get environment action space.
 
         Returns:

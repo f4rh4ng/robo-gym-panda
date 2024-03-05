@@ -14,6 +14,8 @@ JOINT_POSITIONS = [0.0, -2.5, 1.5, -1.5, -1.4, 0.0]
 RANDOM_JOINT_OFFSET = [1.5, 0.25, 0.5, 1.0, 0.4, 3.14]
 # distance to target that need to be reached
 DISTANCE_THRESHOLD = 0.1
+
+
 class EndEffectorPositioningUR(URBaseEnv):
     """Universal Robots UR end effector positioning environment.
 
@@ -33,7 +35,7 @@ class EndEffectorPositioningUR(URBaseEnv):
         real_robot (bool): True if the environment is controlling a real robot.
 
     """
-    def __init__(self, rs_address=None, fix_base=False, fix_shoulder=False, fix_elbow=False, fix_wrist_1=False, fix_wrist_2=False, fix_wrist_3=True, ur_model='ur5', rs_state_to_info=True, restrict_wrist_1=True, **kwargs):
+    def __init__(self, rs_address=None, fix_base=False, fix_shoulder=False, fix_elbow=False, fix_wrist_1=False, fix_wrist_2=False, fix_wrist_3=True, ur_model='ur5', rs_state_to_info=False, restrict_wrist_1=True, **kwargs):
         super().__init__(rs_address, fix_base, fix_shoulder, fix_elbow, fix_wrist_1, fix_wrist_2, fix_wrist_3, ur_model, rs_state_to_info)
         
         self.restrict_wrist_1 = restrict_wrist_1
@@ -73,7 +75,6 @@ class EndEffectorPositioningUR(URBaseEnv):
 
         return gym.spaces.Box(low=min_obs, high=max_obs, dtype=np.float32)
 
-    
     def _set_initial_robot_server_state(self, rs_state, ee_target_pose) -> robot_server_pb2.State:
         string_params = {"object_0_function": "fixed_position"}
         float_params = {"object_0_x": ee_target_pose[0], 
@@ -280,7 +281,6 @@ class EndEffectorPositioningUR(URBaseEnv):
 
         
         return state, reward, done, info
-   
 
     def reward(self, rs_state, action) -> Tuple[float, bool, dict]:
         reward = 0
@@ -364,6 +364,7 @@ class EndEffectorPositioningURSim(EndEffectorPositioningUR, Simulation):
         n_objects:=1.0 \
         object_0_model_name:=sphere50_no_collision \
         object_0_frame:=target"
+
     def __init__(self, ip=None, lower_bound_port=None, upper_bound_port=None, gui=False, ur_model='ur5', **kwargs):
         self.cmd = self.cmd + ' ' + 'ur_model:=' + ur_model
         Simulation.__init__(self, self.cmd, ip, lower_bound_port, upper_bound_port, gui, **kwargs)

@@ -86,5 +86,34 @@ register(
 )
 
 
+# Panda Environments (ADDED BY FARHANG)
+register(
+    id='EmptyEnvironmentPandaSim-v0',
+    entry_point='robo_gym.envs:EmptyEnvironmentPandaSim',
+)
 
+register(
+    id='EmptyEnvironmentPandaRob-v0',
+    entry_point='robo_gym.envs:EmptyEnvironmentPandaRob',
+)
+
+register(
+    id='EndEffectorPositioningPandaSim-v0',
+    entry_point='robo_gym.envs:EndEffectorPositioningPandaSim',
+)
+
+register(
+    id='EndEffectorPositioningPandaRob-v0',
+    entry_point='robo_gym.envs:EndEffectorPositioningPandaRob',
+)
+
+register(
+    id='FollowPandaSim-v0',
+    entry_point='robo_gym.envs:FollowPandaSim',
+)
+
+register(
+    id='FollowPandaRob-v0',
+    entry_point='robo_gym.envs:FollowPandaRob',
+)
 

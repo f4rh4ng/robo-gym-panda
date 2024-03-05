@@ -48,7 +48,7 @@ class UR():
         self.max_joint_velocities = np.zeros(6)
         self.min_joint_velocities = np.zeros(6)
 
-        for idx,joint in enumerate(self.joint_names):
+        for idx, joint in enumerate(self.joint_names):
             self.max_joint_positions[idx] = p["joint_limits"][joint]["max_position"] 
             self.min_joint_positions[idx] = p["joint_limits"][joint]["min_position"]
             self.max_joint_velocities[idx] = p["joint_limits"][joint]["max_velocity"]

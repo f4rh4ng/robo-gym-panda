@@ -17,6 +17,7 @@ from robo_gym.envs.ur.ur_base_avoidance_env import URBaseAvoidanceEnv
 DEBUG = True
 MINIMUM_DISTANCE = 0.45 # the distance [cm] the robot should keep to the obstacle
 
+
 class AvoidanceRaad2022UR(URBaseAvoidanceEnv):
     """Universal Robots UR RAAD environment. Obstacle avoidance while keeping a fixed trajectory.
 
@@ -39,13 +40,14 @@ class AvoidanceRaad2022UR(URBaseAvoidanceEnv):
     """
     max_episode_steps = 1000
 
-    def __init__(self, rs_address=None, fix_base=False, fix_shoulder=False, fix_elbow=False, fix_wrist_1=False, fix_wrist_2=False, fix_wrist_3=True, ur_model='ur5', include_polar_to_elbow=True, rs_state_to_info=True, **kwargs) -> None:
+    def __init__(self, rs_address=None, fix_base=False, fix_shoulder=False, fix_elbow=False, fix_wrist_1=False, fix_wrist_2=False, fix_wrist_3=True, ur_model='ur5', include_polar_to_elbow=True, rs_state_to_info=False, **kwargs) -> None:
         super().__init__(rs_address, fix_base, fix_shoulder, fix_elbow, fix_wrist_1, fix_wrist_2, fix_wrist_3, ur_model, include_polar_to_elbow)
 
         file_name = 'trajectory_raad_2022.json'
         file_path = os.path.join(os.path.dirname(__file__), 'robot_trajectories', file_name)
         with open(file_path) as json_file:
             self.trajectory = json.load(json_file)['trajectory']
+        print(self.trajectory)
 
     def _set_initial_robot_server_state(self, rs_state, fixed_object_position = None) -> robot_server_pb2.State:
         if fixed_object_position:
@@ -201,7 +203,7 @@ class AvoidanceRaad2022UR(URBaseAvoidanceEnv):
         """Get environment observation space."""
 
         # Joint position range tolerance
-        pos_tolerance = np.full(6,0.1)
+        pos_tolerance = np.full(6, 0.1)
         # Joint positions range used to determine if there is an error in the sensor readings
         max_joint_positions = np.add(np.full(6, 1.0), pos_tolerance)
         min_joint_positions = np.subtract(np.full(6, -1.0), pos_tolerance)
@@ -223,7 +225,6 @@ class AvoidanceRaad2022UR(URBaseAvoidanceEnv):
             min_obs = np.concatenate((-target_range, min_joint_positions, min_delta_start_positions, np.zeros(3), min_joint_positions, [0]))
 
         return gym.spaces.Box(low=min_obs, high=max_obs, dtype=np.float32)
-
 
     def _get_joint_positions(self) -> np.ndarray:
         """Get robot joint positions with standard indexing."""
