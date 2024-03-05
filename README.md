@@ -10,7 +10,8 @@
 
 ![ezgif com-gif-maker](https://github.com/f4rh4ng/robo-gym-panda/assets/89604072/d0b6d5a1-9122-4e1b-9ab0-505a37a5a47b)
 ![ezgif com-gif-maker(1)](https://github.com/f4rh4ng/robo-gym-panda/assets/89604072/b328a398-50dc-41f2-8683-0f43f21f6085)
-![lessthan50robot-ezgif com-optimize](https://github.com/f4rh4ng/robo-gym-panda/assets/89604072/8976041b-5b39-4f2e-8495-4a7d9c1ce391)
+![lessthan50robot-ezgif com-repair](https://github.com/f4rh4ng/robo-gym-panda/assets/89604072/e418f397-3589-4626-bcf3-986fa8d9e976)
+
 
 
 
