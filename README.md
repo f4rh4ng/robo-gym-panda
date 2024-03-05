@@ -6,7 +6,7 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/robo-gym)
 
 
-**This Project introduces an extension for the ``robo-gym`` toolkit. It adds the support of Franka Emika Panda Robot.**
+**This Project introduces an extension for the ``robo-gym`` toolkit. It adds the support for Franka Emika Panda Robot.**
 
 
 Added features :
