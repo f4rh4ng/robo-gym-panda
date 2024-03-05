@@ -179,9 +179,4 @@ python3 train.py --config ./configs/openai/d4pg/panda_reach_d4pg.yml
   then: ``Crtl+B  )``
 - Publishing frequency can be modified in ``FollowPandaSim`` or ``EndEffectorPositioningPandaSim`` at the bottom of the python files of the respective environments under the name ``action_cycle_rate``.
 
-- Don't forget to add the following line to ``.bashrch``:
-  ```sh  
-		source /home/farhang/robogym_ws/devel/setup.bash 
-  ```
-
 ----------------------------------------
