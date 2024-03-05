@@ -152,7 +152,7 @@ roslaunch franka_interface interface.launch
 ```sh
 roslaunch panda_robot_server real_panda_robot_server.launch real_robot:=true gui:=true reference_frame:=world max_velocity_scale_factor:=0.1 action_cycle_rate:=400 objects_controller:=true rs_mode:=1object n_objects:=1.0 object_0_frame:=target action_mode:=abs_pos
 ```
-**Terminal 3(When testing D4PG):**
+**Terminal 3 (When testing D4PG):**
 ```sh
 cd
 cd robo-gym-panda/docs/examples/d4pg-pytorch
